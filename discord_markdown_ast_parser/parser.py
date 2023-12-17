@@ -250,7 +250,7 @@ def parse_tokens_generator(
             )
             i += 1
             continue
-        
+
         # URL with preview
         if LexingRule.URL_WITH_PREVIEW in current_token:
             yield Node(
@@ -318,21 +318,14 @@ def parse_tokens_generator(
                 tokens[i + 1 :], [current_token.lexing_rule]
             )
             if children_token is not None:
-                children_content = ""
-                # treat all children token as inline text
-                for child_token in children_token:
-                    children_content += child_token.value
-
+                children_content = "".join(child_token.value for child_token in children_token)
                 # check for a language specifier
                 lines = children_content.split("\n")
-                # there must be at least one other non-empty line
-                # (the content doesn't matter, there just has to be one)
-                non_empty_line_found = False
                 lang = None
-                for line_index in range(1, len(lines)):
-                    if len(lines[line_index]) > 0:
-                        non_empty_line_found = True
-                        break
+                non_empty_line_found = any(
+                    len(lines[line_index]) > 0
+                    for line_index in range(1, len(lines))
+                )
                 if non_empty_line_found:
                     match = LANG_SPEC.fullmatch(lines[0])
                     # if there is any behind the lang spec, then it is normal text
@@ -384,7 +377,7 @@ def parse_tokens_generator(
                 i = len(tokens)  # move to the end
                 break
 
-        if len(children_token_in_quote_block) > 0:
+        if children_token_in_quote_block:
             # tell the inner parse function that it's now inside a quote block
             children_nodes = list(
                 parse_tokens_generator(
