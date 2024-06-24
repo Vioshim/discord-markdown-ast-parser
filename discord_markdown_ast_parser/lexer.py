@@ -15,10 +15,9 @@ class Lexing:
     def __repr__(self):
         return f"{self.__class__.__name__}({self.regex and self.regex.pattern!r})"
 
-# stolen from https://www.urlregex.com/
-URL_REGEX = (
-    r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
-)
+
+URL_REGEX = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+
 
 class LexingRule(Lexing, Enum):
     USER_MENTION = r"<@!?(\d{15,20})>"
