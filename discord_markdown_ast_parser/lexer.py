@@ -16,7 +16,7 @@ class Lexing:
         return f"{self.__class__.__name__}({self.regex and self.regex.pattern!r})"
 
 
-URL_REGEX = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
+URL_REGEX = r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)"
 
 
 class LexingRule(Lexing, Enum):
