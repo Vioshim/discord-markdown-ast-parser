@@ -4,7 +4,7 @@ from enum import Enum
 import itertools
 from typing import Optional, Generator, Any, List, Dict, Tuple, Iterable
 
-from lexer import Token, LexingRule, Lexing
+from .lexer import Token, LexingRule, Lexing
 
 
 NodeType = Enum(
@@ -21,12 +21,14 @@ NodeType = Enum(
         "CHANNEL",
         "SLASH_COMMAND",
         "EMOJI_CUSTOM",
+        "EMOJI_CUSTOM_ANIMATED",
         "EMOJI_UNICODE",
         "EMOJI_UNICODE_ENCODED",
         "URL_WITH_PREVIEW_EMBEDDED",
         "URL_WITHOUT_PREVIEW_EMBEDDED",
         "URL_WITH_PREVIEW",
         "URL_WITHOUT_PREVIEW",
+        "TIMESTAMP",
         "QUOTE_BLOCK",
         "CODE_BLOCK",
         "CODE_INLINE",
